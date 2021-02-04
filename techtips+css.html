@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8"/>
+        <link rel="stylesheet" href="style.css" type="text/css"/>
+        <title>Tech Tips with CSS</title>
+    </head>
+    <body>
+        <div>
+            <h1 class="heading">Tech Tips with CSS</h1>
+            <h4 class="heading">Directory</h4>
+            <ul id="directory">
+                <li><a href="index.html">Walter Mondale's Sad Times Blog</a></li>
+                <li><a href="about.html">About Walter Mondale</a></li>
+                <li><a href="techtips+css.html">Tech Tips with CSS</a></li>
+                <li><a href="techtips-css.html">Tech Tips without CSS</a></li>
+            </ul>
+        </div>
+        <div>
+            <h2 class="heading">HTML Tags</h2>
+            <ol class="green">
+                <li><code>&lt;a&gt;</code>
+                    <ul>
+                        <li>Purpose: Anchors a hyperlink to element</li>
+                        <li>Inline element</li>
+                        <li>Accepts flow or phrasing content</li>
+                    </ul>
+                </li>
+                <li><code>&lt;body&gt;</code>
+                    <ul>
+                        <li>Purpose: Contain all media for the document</li>
+                        <li>Neither block-level or inline</li>
+                        <li>Accepts flow content </li>
+                        <li>Required parent tag: Must be the second element of <code>&lt;html&gt;</code></li>
+                    </ul>
+                </li>
+                <li><code>&lt;code&gt;</code>
+                    <ul>
+                        <li>Purpose: Display text in monospace font</li>
+                        <li>Inline element</li>
+                        <li>Accepts phrasing content</li>
+                    </ul>
+                </li>
+                <li><code>&lt;div&gt;</code>
+                    <ul>
+                        <li>Purpose: Separate sections of the document</li>
+                        <li>Block-level element</li>
+                        <li>Accepts flow content</li>
+                    </ul>
+                </li>
+                <li><code>&lt;h1&gt;</code>
+                    <ul>
+                        <li>Purpose: Largest header element</li>
+                        <li>Block-level element</li>
+                        <li>Accepts phrasing content</li>
+                    </ul>
+                </li>
+                <li><code>&lt;h2&gt;</code>
+                    <ul>
+                        <li>Purpose: Second largest header element</li>
+                        <li>Block-level element</li>
+                        <li>Accepts phrasing content</li>
+                    </ul>
+                </li>
+                <li><code>&lt;head&gt;</code>
+                    <ul>
+                        <li>Purpose: Contains all metadata concerning the document.</li>
+                        <li>Neither block-level or inline</li>
+                        <li>Accepts metadata content </li>
+                        <li>Required parent tag: Must be the first element of <code>&lt;html&gt;</code></li>
+                    </ul>
+                </li>
+                <li><code>&lt;img&gt;</code>
+                    <ul>
+                        <li>Purpose: Display an image</li>
+                        <li>Inline element</li>
+                        <li>Empty tag, accepts multiple image formats such as <code>.apng, .avif, .gif, .jpg, .png, .svg, ...</code></li>
+                    </ul>
+                </li>
+                <li><code>&lt;li&gt;</code>
+                    <ul>
+                        <li>Purpose: Represent a list item</li>
+                        <li>Block-level element</li>
+                        <li>Accepts flow content </li>
+                        <li>Required parent tag: Must be a child of one of the following: <code>&lt;ul&gt;, &lt;ol&gt;, &lt;menu&gt;</code></li>
+                    </ul>
+                </li>
+                <li><code>&lt;ol&gt;</code>
+                    <ul>
+                        <li>Purpose: Create an ordered list of data</li>
+                        <li>Block-level element</li>
+                        <li>Accepts zero or more of the following: <code>&lt;li&gt;, &lt;script&gt;, &lt;template&gt;</code> </li>
+                    </ul>
+                </li>
+                <li><code>&lt;p&gt;</code>
+                    <ul>
+                        <li>Purpose: Represent a paragraph</li>
+                        <li>Block-level element</li>
+                        <li>Accepts phrasing content</li>
+                    </ul>
+                </li>
+                <li><code>&lt;title&gt;</code>
+                    <ul>
+                        <li>Purpose: Displays contents on browser title bar</li>
+                        <li>Neither block-level or inline</li>
+                        <li>Accepts text content not including inter-element whitespace</li>
+                        <li>Required parent tag: A <code>&lt;head&gt;</code> element that does not contain another title element. </li>
+                    </ul>
+                </li>
+                <li><code>&lt;ul&gt;</code>
+                    <ul>
+                        <li>Purpose: Create an unordered list of data</li>
+                        <li>Block-level element</li>
+                        <li>Accepts zero or more of the following: <code>&lt;li&gt;, &lt;script&gt;, &lt;template&gt;</code></li>
+                    </ul>
+                </li>
+            </ol>
+        </div>
+        <div>
+            <h2 class="heading">HTML Entities</h2>
+            <ol class="blue">
+                <li><code>&a</code><code>mp;</code>
+                    <ul>
+                        <li>Name: Ampersand </li>
+                        <li>Appearance: &amp;</li>
+                    </ul>
+                </li>
+                <li><code>&g</code><code>t;</code>
+                    <ul>
+                        <li>Name: Greater than symbol </li>
+                        <li>Appearance: &gt;</li>
+                    </ul>
+                </li>
+                <li><code>&l</code><code>t;</code>
+                    <ul>
+                        <li>Name: Less than symbol </li>
+                        <li>Appearance: &lt;</li>
+                    </ul>
+                </li>
+                <li><code>&q</code><code>uot;</code>
+                    <ul>
+                        <li>Name: Quotation marks </li>
+                        <li>Appearance: &quot;</li>
+                    </ul>
+                </li>
+            </ol>
+        </div>
+        <div>
+            <h2 class="heading">CSS Selectors</h2>
+            <ol class="red">
+                <li><code>.class</code>
+                    <ul>
+                        <li>Purpose: Selects all elements with class = "class". </li>
+                        <li>Ex. &lt; h1 class="heading" &gt;</li>
+                    </ul>
+                </li>
+                <li><code>element</code>
+                    <ul>
+                        <li>Purpose: Selects a particular HTML element</li>
+                    </ul>
+                </li>
+                <li><code>#id</code>
+                    <ul>
+                        <li>Purpose: Selects all elements with id = "id"</li>
+                        <li>Ex. &lt; p id="specialParagraph" &gt;</li>
+                    </ul>
+                </li>
+                <li><code>element:nth-child(n)</code>
+                    <ul>
+                        <li>Purpose: Selects every nth child element of element</li>
+                        <li>Ex. ol li:nth-child(2n){ /*This selects every other child beginning with the second child.*/} </li>
+                    </ul>
+                </li>
+            </ol>
+        </div>
+        <div>
+            <h2 class="heading">CSS Properties</h2>
+            <ol class="yellow">
+                <li><code>background-color</code>
+                    <ul>
+                        <li>Set background color of an element</li>
+                        <li>Possible val: midnightblue, wheat</li>
+                    </ul>
+                </li>
+                <li><code>color</code>
+                    <ul>
+                        <li>Set color of element text</li>
+                        <li>Possible val: snow, palegreen</li>
+                    </ul>
+                </li>
+                <li><code>font-family</code>
+                    <ul>
+                        <li>Sets font family for text</li>
+                        <li>Possible val: verdana, courier new</li>
+                    </ul>
+                </li>
+                <li><code>font-size</code>
+                    <ul>
+                        <li>Sets size of text</li>
+                        <li>Possible val: 150%, 200px</li>
+                    </ul>
+                </li>
+                <li><code>font-style</code>
+                    <ul>
+                        <li>Sets style of text</li>
+                        <li>Possible val: italic, oblique</li>
+                    </ul>
+                </li>
+                <li><code>font-weight</code>
+                    <ul>
+                        <li>Sets the weight of text</li>
+                        <li>Possible val: lighter</li>
+                    </ul>
+                </li>
+                <li><code>line-height</code>
+                    <ul>
+                        <li>Specifies the line height</li>
+                        <li>Possible val: 150%, 30px</li>
+                    </ul>
+                </li>
+                <li><code>margin</code>
+                    <ul>
+                        <li>Specifies the margins</li>
+                        <li>Possible val: 150%, 200px</li>
+                    </ul>
+                </li>
+                <li><code>padding</code>
+                    <ul>
+                        <li>Specifies an elements padding</li>
+                        <li>Possible val: 35px</li>
+                    </ul>
+                </li>
+                <li><code>text-align</code>
+                    <ul>
+                        <li>Sets the element's text alignment</li>
+                        <li>Possible val: center, right, justify</li>
+                    </ul>
+                </li>
+                <li><code>width</code>
+                    <ul>
+                        <li>Specifies the width of an element</li>
+                        <li>Possible val: 150%, 200px </li>
+                    </ul>
+                </li>
+            </ol>
+        </div>
+    </body>
+</html>

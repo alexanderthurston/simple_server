@@ -1,0 +1,72 @@
+html{
+    font-family: "Courier New";
+    font-size: 125%;
+    margin: 10px;
+    background-color: midnightblue;
+}
+
+
+ul li{
+    font-weight: lighter;
+}
+
+p{
+    padding:35px;
+}
+
+.heading{
+    font-style: italic;
+    color: red;
+    text-align: center;
+}
+
+.headline{
+    color: red;
+}
+
+.byline{
+    color: tomato;
+    font-size: 15px;
+}
+
+
+.green{
+        background-color: palegreen;
+}
+
+.green ul li:nth-child(2n + 1){
+    background-color: lightgreen;
+}
+
+.blue{
+    background-color: lightblue;
+}
+
+.blue ul li:nth-child(2n + 1){
+    background-color: lightskyblue;
+}
+
+.red{
+    background-color: tomato;
+}
+
+.red ul li:nth-child(2n + 1){
+    background-color: orangered;
+}
+
+.yellow{
+    background-color: gold;
+}
+
+.yellow ul li:nth-child(2n + 1){
+    background-color: goldenrod;
+}
+
+#directory{
+    background-color: oldlace;
+    line-height:200%;
+    width: 50%;
+}
+
+
+
