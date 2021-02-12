@@ -1,5 +1,7 @@
 from http.server import HTTPServer, BaseHTTPRequestHandler
 from time import strftime
+from pathlib import Path
+from mimetypes import guess_type
 
 class Server(BaseHTTPRequestHandler):
     """
@@ -19,54 +21,127 @@ class Server(BaseHTTPRequestHandler):
         f.close()
         return len(data)
 
+    def do_HEAD(self, statusMessage):
+        MAX_AGE = 5
+
+        self.wfile.write(bytes(f"{statusMessage}\n", encoding="utf-8"))
+        self.wfile.write(bytes(f"Server: {self.server}\n", encoding="utf-8"))
+        self.wfile.write(bytes(f"Date: {strftime('%c')}\n", encoding="utf-8"))
+        self.wfile.write(bytes(f"Cache-Control : max-age={MAX_AGE}\n", encoding="utf-8"))
+
+        self.wfile.write(b"Connection: close\n")
+
     def do_GET(self):
         imageResourceFiles = {"/images/sad-mondale.jpg", "/images/church.jpg", "/images/gary-hart.jpg", "/images/wendys-burger.jpeg"}
-        MAX_AGE = 5
+
+
         print(f"The user requested {self.path}")
 
 
         if self.path == "/index.html":
-            self.wfile.write(b"HTTP/1.1 200 OK\n")
-            self.wfile.write(b"Server: Alex T's Server\n")
-            self.wfile.write(bytes(f"Date: {strftime('%c')}\n", encoding="utf-8"))
-            self.wfile.write(bytes(f"Cache-Control : max-age={MAX_AGE}\n", encoding="utf-8"))
+            self.do_HEAD("HTTP/1.1 200 OK")
+            size = self.get_file_size(self.path[1:])
+            self.wfile.write(b"Content-Type: text/html\n")
+            self.wfile.write(bytes(f"Content-Length: {size}\n", encoding="utf-8"))
             self.wfile.write(b"\n")
+
             self.wfile.write(self.load_file("index.html"))
 
+        elif self.path == "/about.html":
+            self.do_HEAD("HTTP/1.1 200 OK")
+            size = self.get_file_size(self.path[1:])
+            self.wfile.write(b"Content-Type: text/html\n")
+            self.wfile.write(bytes(f"Content-Length: {size}\n", encoding="utf-8"))
+            self.wfile.write(b"\n")
+
+            self.wfile.write(self.load_file("about.html"))
+
+        elif self.path == "/tips.html":
+            self.do_HEAD("HTTP/1.1 200 OK")
+            size = self.get_file_size(self.path[1:])
+            self.wfile.write(b"Content-Type: text/html\n")
+            self.wfile.write(bytes(f"Content-Length: {size}\n", encoding="utf-8"))
+            self.wfile.write(b"\n")
+
+            self.wfile.write(self.load_file("tips.html"))
+
         elif self.path == "/style.css":
-            self.wfile.write(b"HTTP/1.1 200 OK\n")
-            self.wfile.write(b"Server: Alex T's Server\n")
-            self.wfile.write(bytes(f"Date: {strftime('%c')}\n", encoding="utf-8"))
-            size = self.get_file_size("style.css")
+            self.do_HEAD("HTTP/1.1 200 OK")
+            size = self.get_file_size(self.path[1:])
             self.wfile.write(b"Content-Type: text/css\n")
             self.wfile.write(bytes(f"Content-Length: {size}\n", encoding="utf-8"))
-
             self.wfile.write(b"\n")
+
             self.wfile.write(self.load_file("style.css"))
 
         elif self.path == "/favicon.ico":
-            self.wfile.write(b"HTTP/1.1 200 OK\n")
-            self.wfile.write(b"Server: Alex T's Server\n")
-            self.wfile.write(bytes(f"Date: {strftime('%c')}\n", encoding="utf-8"))
-            size = self.get_file_size("style.css")
-            self.wfile.write(b"Content-Type: text/css\n")
+            self.do_HEAD("HTTP/1.1 200 OK")
+            size = self.get_file_size(self.path[1:])
+            self.wfile.write(b"Content-Type: image/x-icon\n")
             self.wfile.write(bytes(f"Content-Length: {size}\n", encoding="utf-8"))
             self.wfile.write(b"\n")
+
             self.wfile.write(self.load_file('favicon.ico'))
 
+        elif self.path == "/debugging":
+            self.do_HEAD("HTTP/1.1 200 OK")
+            self.wfile.write(bytes(f"""
+<!DOCTYPE html>
+<html lang='en'>
+    <head>
+        <meta charset='UTF-8'>
+        <link rel='stylesheet' href='style.css' type='text/css'/>
+        <title>Debugging Info</title>
+    </head>
+    <body>
+        <h1 class='heading'>Debugging Page</h1>
+        <ol class='blue'>
+            <li>Server Version: {self.server_version}</li>
+            <li>Server Date: {strftime('%c')}</li>
+            <li>Client IP address: {self.client_address}</li>
+            <li>Path Requested: </li>
+            <li>HTTP Request Type: </li>
+            <li>HTTP Request Version: </li>
+            <li>HTTP Headers: <ul>{self.get_headers()}</ul></li>
+
+    </body>
+</html>""", encoding="utf-8"))
+
+        elif self.path in imageResourceFiles:
+            self.do_HEAD("HTTP/1.1 200 OK")
+            size = self.get_file_size(self.path[1:])
+            self.wfile.write(bytes(f"Content-Type: {guess_type(self.path)}\n", encoding="utf-8"))
+            self.wfile.write(bytes(f"Content-Length: {size}\n", encoding="utf-8"))
+            self.wfile.write(b"\n")
+
+            self.wfile.write(self.load_file(self.path[1:]))
+
+        elif "/bio" in self.path:
+            self.do_HEAD("HTTP/1.1 301 Moved Permanently")
+            self.wfile.write(b"Location: /about.html\n")
+            self.wfile.write(b"\n")
+
+
         elif self.path == "/":
-            self.wfile.write(b"HTTP/1.1 307 Temporary Redirect\n")
-            self.wfile.write(b"Server: Alex T's Server\n")
-            self.wfile.write(bytes(f"Date: {strftime('%c')}\n", encoding="utf-8"))
+            self.do_HEAD("HTTP/1.1 301 Moved Permanently")
             self.wfile.write(b"Location: /index.html\n")
             self.wfile.write(b"\n")
 
-        else:
-            self.wfile.write(b"HTTP/1.1 404 Not Found\n")
-            self.wfile.write(b"Server: Alex T's Server\n")
-            self.wfile.write(bytes(f"Date: {strftime('%c')}\n", encoding="utf-8"))
+
+        elif Path(self.path[1:] + ".html").is_file():
+            self.do_HEAD("HTTP/1.1 301 Moved Permanently")
+            self.wfile.write(bytes(f"Location : {self.path}.html\n", encoding="utf-8"))
             self.wfile.write(b"\n")
-            # self.wfile.write(self.load_file('404.html'))
+
+        elif self.path == "/forbidden":
+            self.do_HEAD("HTTP/1.1 403 Forbidden")
+            self.wfile.write(b"\n")
+
+            self.wfile.write(self.load_file("403.html"))
+
+        else:
+            self.do_HEAD("HTTP/1.1 404 Not Found")
+            self.wfile.write(self.load_file('404.html'))
 
     def load_file(self, filename):
         # TODO: do some safety checks:
@@ -76,6 +151,12 @@ class Server(BaseHTTPRequestHandler):
         f.close()
         return data
 
+    def get_headers(self):
+        header_bytes = ''
+        for header, value in self.headers.items():
+            header_bytes+=(f'<li>{header} : {value}</li>')
+
+        return header_bytes
 
 if __name__ == '__main__':
     server_address = ('localhost', 8000)
