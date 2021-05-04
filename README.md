@@ -1,2 +1,0 @@
-	
-You look beautiful today.
